@@ -7,7 +7,7 @@ export const IntroContainer = styled.div`
   max-height: 544px;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 2.5rem 20rem 2.5rem;
+  padding: 2.5rem 18rem 2.5rem;
 
   img {
     margin-left: 145px;
