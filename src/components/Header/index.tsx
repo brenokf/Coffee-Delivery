@@ -9,11 +9,15 @@ import logoCoffe from '../../assets/logo.svg'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { MarketContext } from '../../contexts/Marketcontext'
 import { useContext } from 'react'
+import { NavLink } from 'react-router-dom'
 export function Header() {
   const { quantityCoffesOrderted } = useContext(MarketContext)
+
   return (
     <HeaderContainer>
-      <img src={logoCoffe} alt="" />
+      <NavLink to="/" title="Home">
+        <img src={logoCoffe} alt="" />
+      </NavLink>
       <nav>
         <ActionsContainer>
           <LocationActionContainer>
@@ -21,12 +25,14 @@ export function Header() {
             <span>Manaus, AM</span>
           </LocationActionContainer>
           {quantityCoffesOrderted > 0 ? (
-            <CartActionContainer>
-              <ShoppingCart size={18} weight="fill" />
-              <CartCounter>
-                <p>{quantityCoffesOrderted}</p>
-              </CartCounter>
-            </CartActionContainer>
+            <NavLink to="/checkout" title="checkout">
+              <CartActionContainer>
+                <ShoppingCart size={18} weight="fill" />
+                <CartCounter>
+                  <p>{quantityCoffesOrderted}</p>
+                </CartCounter>
+              </CartActionContainer>
+            </NavLink>
           ) : (
             <CartActionContainer>
               <ShoppingCart size={18} weight="fill" />
