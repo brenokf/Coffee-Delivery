@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+// ${(props) => props.theme[TYPE_COLORS[props.itemColor]]};
 export const ContainerList = styled.div`
   display: flex;
   flex-direction: row;
@@ -8,7 +9,7 @@ export const ContainerList = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  padding: 2.5rem 20rem 2.5rem;
+  padding: 2.5rem 18rem 2.5rem;
   gap: 54px;
   h1 {
     font-family: 'Baloo 2', sans-serif;
@@ -22,23 +23,41 @@ export const Filters = styled.div`
   justify-content: space-between;
   gap: 8px;
 `
-export const Tag = styled.div`
+
+export const Tag = styled.button`
   pointer-events: all;
   display: flex;
   max-width: 100%;
   max-height: 100%;
   align-items: flex-start;
   text-align: start;
-  padding: 5px 5px 5px;
+  padding: 5px 12px 5px;
+  background-color: ${(props) => props.theme.white};
   border: 1px solid ${(props) => props.theme.yellow};
   border-radius: 100px;
 
-  span {
+  a {
     font-size: 10px;
     font-weight: bold;
     line-height: 130%;
     font-family: 'Roboto', sans-serif;
     color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${(props) => props.theme['yellow-dark']};
+    a {
+      color: ${(props) => props.theme.white};
+    }
+  }
+
+  &.active {
+    content: '';
+    background-color: ${(props) => props.theme['yellow-dark']};
+    a {
+      color: ${(props) => props.theme.white};
+    }
   }
 `
 
