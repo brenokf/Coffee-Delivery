@@ -24,7 +24,15 @@ import {
   Bank,
   Money,
 } from 'phosphor-react'
+
+import { useForm } from 'react-hook-form'
+import { MarketContext } from '../../../contexts/Marketcontext'
+import { useContext } from 'react'
+
 export function Frame() {
+  const { money, credit, debit, paymentTypes } = useContext(MarketContext)
+  const { register } = useForm()
+
   return (
     <FrameContainer>
       <h4>Complete seu pedido</h4>
@@ -37,20 +45,42 @@ export function Frame() {
           </div>
         </FrameFormTitle>
         <FormsContainer>
-          <CEPInput type="text" placeholder="CEP" />
-          <StreetInput type="text" placeholder="Rua" />
+          <CEPInput type="text" placeholder="CEP" {...register('cep')} />
+          <StreetInput
+            id="streetName"
+            type="text"
+            placeholder="Rua"
+            {...register('streetName')}
+          />
           <InfoContainer>
-            <HouseNumberInput type="number" name="" placeholder="Numero" />
+            <HouseNumberInput
+              id="houseNumber"
+              type="number"
+              placeholder="Numero"
+              {...register('houseNumber', { valueAsNumber: true })}
+            />
             <ComplementAddressInput
+              id="complementAddress"
               type="text"
               placeholder="Complemento"
               datatype="text"
+              {...register('complementAddress')}
             />
           </InfoContainer>
           <InfoContainer>
-            <NeighborhoodInput type="text" name="" placeholder="Bairro" />
-            <CityInput type="text" name="" placeholder="Cidade" />
-            <UFInput type="text" name="" placeholder="UF" />
+            <NeighborhoodInput
+              id="neighborhood"
+              type="text"
+              placeholder="Bairro"
+              {...register('neighborhood')}
+            />
+            <CityInput
+              id="cityName"
+              type="text"
+              placeholder="Cidade"
+              {...register('cityName')}
+            />
+            <UFInput id="uf" type="text" placeholder="UF" {...register('uf')} />
           </InfoContainer>
         </FormsContainer>
       </CoffeeCardFormContainer>
@@ -65,15 +95,30 @@ export function Frame() {
           </FramePayTitle>
         </FramePayContainer>
         <FramePayButtonsContainer>
-          <PaymentMethodInput>
+          <PaymentMethodInput
+            isSelected={credit}
+            onClick={() => {
+              paymentTypes('credit_card')
+            }}
+          >
             <CreditCard size={16} />
             CARTÃO DE CRÉDITO
           </PaymentMethodInput>
-          <PaymentMethodInput>
+          <PaymentMethodInput
+            isSelected={debit}
+            onClick={() => {
+              paymentTypes('debit_card')
+            }}
+          >
             <Bank size={16} />
             CARTÃO DE DEBITO
           </PaymentMethodInput>
-          <PaymentMethodInput>
+          <PaymentMethodInput
+            isSelected={money}
+            onClick={() => {
+              paymentTypes('money')
+            }}
+          >
             <Money size={16} />
             DINHEIRO
           </PaymentMethodInput>
