@@ -145,8 +145,14 @@ export const FramePayButtonsContainer = styled.div`
   margin-top: 32px;
   gap: 16px;
 `
-export const PaymentMethodInput = styled.button`
+
+interface selected {
+  isSelected: boolean
+}
+
+export const PaymentMethodInput = styled.button<selected>`
   display: flex;
+  pointer-events: all;
   width: 31%;
   height: 51px;
   align-items: center;
@@ -154,7 +160,11 @@ export const PaymentMethodInput = styled.button`
 
   border: none;
   border-radius: 6px;
-  background: ${(props) => props.theme['base-button']};
+  //${(props) => props.theme['base-button']};
+  background: ${(props) =>
+    props.isSelected
+      ? props.theme['purple-light']
+      : props.theme['base-button']};
 
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
@@ -164,5 +174,10 @@ export const PaymentMethodInput = styled.button`
 
   svg {
     color: ${(props) => props.theme.purple};
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.theme['base-hover']};
   }
 `
