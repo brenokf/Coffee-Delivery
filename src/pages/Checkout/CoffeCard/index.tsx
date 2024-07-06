@@ -16,16 +16,23 @@ import {
 } from './styles'
 
 import { Minus, Plus, Trash } from 'phosphor-react'
-import { useContext, useEffect } from 'react'
-import { CoffePropries, MarketContext } from '../../../contexts/Marketcontext'
+import { useContext } from 'react'
+import { MarketContext } from '../../../contexts/Marketcontext'
+import { NavLink, Link } from 'react-router-dom'
+interface submitDisabled {
+  isSubmitDisabled: boolean
+}
 
-export function CoffeeCard() {
+export function CoffeeCard({
+  isSubmitDisabled,
+}: {
+  isSubmitDisabled: boolean
+}) {
   const {
     handleCounterClickDown,
     handleCounterClickPlus,
     checkout,
     costFreight,
-    handleUpdateValue,
     totalAllPurchases,
     convertedCost,
     grandTotalOfPurchase,
@@ -67,6 +74,7 @@ export function CoffeeCard() {
                       </CounterButton>
                     </BuyCounter>
                     <RemoveItem
+                      type="button"
                       onClick={() => {
                         handleRemoveSpecificCoffee(coffee.id)
                       }}
@@ -95,7 +103,11 @@ export function CoffeeCard() {
             <p>{`${grandTotalOfPurchase(costFreight)}`}</p>
           </Total>
         </TotalPurchaseAndDelivery>
-        <ConfirmOrder onClick={() => {}}>CONFIRMAR PEDIDO</ConfirmOrder>
+        <Link to="/success" title="Success">
+          <ConfirmOrder type="button" disabled={isSubmitDisabled}>
+            CONFIRMAR PEDIDO
+          </ConfirmOrder>
+        </Link>
       </CoffeeCardContainer>
     </FrameContainer>
   )
