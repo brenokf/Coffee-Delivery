@@ -12,6 +12,18 @@ export interface CoffePropries {
   }[]
   total: number
 }
+
+export interface UserAndress {
+  cep: string
+  streetName: string
+  houseNumber: number
+  complementAddress?: string | undefined
+  neighborhood: string
+  cityName: string
+  uf: string
+  PaymentType: string | undefined
+}
+
 export interface MarketContextType {
   coffes: CoffePropries[]
   checkout: CoffePropries[]
@@ -21,7 +33,12 @@ export interface MarketContextType {
   credit: boolean
   debit: boolean
   payType: string
+  uf: string
+  cep: string
+  userInformation: UserAndress
   convertedCost: (value: number) => void
+  mascaraCep: (value: string) => void
+  maskUF: (value: string) => void
   // totalValueThisCoffeeOrders: (coffeeId: CoffePropries) => void
   grandTotalOfPurchase: (costFreight: number) => void
   handleUpdateValue: (idCoffee: number) => void
@@ -42,6 +59,9 @@ export interface MarketContextType {
     initialValue: number,
   ) => number
   handleFilterTags: (coffeData: CoffePropries[], type: string) => void
+
+  submitOrder: (data: UserAndress) => void
+  submitButtonState: (state: boolean) => void
 }
 
 export const MarketContext = createContext({} as MarketContextType)
@@ -69,7 +89,17 @@ export function MarketContextProvider({
 
   const [checkout, setCheckout] = useState<CoffePropries[]>([])
   const handleBuySpecificCoffe = (SelectedCoffee: CoffePropries) => {
-    setCheckout((addCheckout) => [...addCheckout, SelectedCoffee])
+    const indexCoffee = checkout.findIndex(
+      (coffe) => coffe.id === SelectedCoffee.id,
+    )
+    console.log('index Coffee=> ' + indexCoffee)
+    if (indexCoffee !== -1) {
+      console.log('quantity' + checkout[indexCoffee].quantity)
+      checkout[indexCoffee].quantity = SelectedCoffee.quantity
+      handleUpdateValue(SelectedCoffee.id)
+    } else {
+      setCheckout([...checkout, SelectedCoffee])
+    }
   }
 
   function handleCounterClickPlus(
@@ -113,7 +143,6 @@ export function MarketContextProvider({
   const [tagSelect, setTagSelect] = useState<string[]>([])
   function handleFilterTags(listCoffes: CoffePropries[], Tag: string) {
     setTagSelect([...tagSelect, Tag])
-    setCoffes([])
     console.log({ tagSelect, Tag })
     if (tagSelect.indexOf(Tag) === -1) {
       const filtered = listCoffes.filter((coffe) => {
@@ -202,6 +231,91 @@ export function MarketContextProvider({
     const removeItem = checkout.filter((check) => check.id !== coffeeId)
     setCheckout(removeItem)
   }
+
+  const [userInformation, setUserInformation] = useState({
+    cep: '',
+    streetName: '',
+    houseNumber: 0,
+    complementAddress: '',
+    neighborhood: '',
+    cityName: '',
+    uf: '',
+    payType: '',
+  })
+  const submitOrder = (data: UserAndress) => {
+    const info = {
+      cep: data.cep,
+      streetName: data.streetName,
+      houseNumber: data.houseNumber,
+      complementAddress: data.complementAddress || '',
+      neighborhood: data.neighborhood,
+      cityName: data.cityName,
+      uf: data.uf,
+      payType,
+    }
+    setUserInformation(info)
+    console.log({ userInformation })
+  }
+
+  const submitButtonState = (state: boolean) => {
+    return state
+  }
+
+  const [cep, setCep] = useState('')
+  const mascaraCep = (value: string) => {
+    !value
+      ? setCep('')
+      : setCep(
+          value
+            .replace(/\D/g, '')
+            .replace(/^(\d{5})(\d{3})+?$/, '$1-$2')
+            .replace(/(-\d{3})(\d+?)/, '$1'),
+        )
+  }
+
+  const UF = [
+    'RO',
+    'AC',
+    'AM',
+    'RR',
+    'PA',
+    'AP',
+    'TO',
+    'MA',
+    'PI',
+    'CE',
+    'RN',
+    'PB',
+    'PE',
+    'AL',
+    'SE',
+    'BA',
+    'MG',
+    'ES',
+    'RJ',
+    'SP',
+    'PR',
+    'SC',
+    'RS',
+    'MS',
+    'MT',
+    'DF',
+  ]
+  const [uf, setUF] = useState('')
+  const maskUF = (value: string) => {
+    if (value.length <= 2) {
+      const ufIndentification = value.toUpperCase()
+      const existUF = UF.includes(ufIndentification)
+      console.log({ ufIndentification, existUF })
+      if (existUF) {
+        setUF(ufIndentification)
+      }
+    }
+  }
+  // endereço [endereço , numero e complemento se tiver]
+  // previsão de entrega
+  // tipo de pagamento
+
   useEffect(() => {}, [checkout])
   return (
     <MarketContext.Provider
@@ -214,17 +328,24 @@ export function MarketContextProvider({
         credit,
         debit,
         payType,
+        cep,
+        uf,
+        userInformation,
         handleRemoveSpecificCoffee,
         paymentTypes,
         handleUpdateValue,
         totalAllPurchases,
         convertedCost,
+        mascaraCep,
+        maskUF,
         grandTotalOfPurchase,
         handleCounterClickPlus,
         handleCounterClickDown,
         handleQuantityCoffee,
         handleBuySpecificCoffe,
         handleFilterTags,
+        submitOrder,
+        submitButtonState,
       }}
     >
       {children}
