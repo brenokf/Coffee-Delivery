@@ -101,7 +101,7 @@ export function CoffeList({ listCoffes }: CoffeListProps) {
                         <input
                           min="0"
                           name="quantity"
-                          value="0"
+                          value={coffe.quantity}
                           type="number"
                         />
                         <CounterButton
@@ -176,7 +176,6 @@ export function CoffeList({ listCoffes }: CoffeListProps) {
                         </CounterButton>
                       </BuyCounter>
                       <button
-                        type="submit"
                         onClick={() => {
                           handleBuySpecificCoffe(coffe)
                         }}
