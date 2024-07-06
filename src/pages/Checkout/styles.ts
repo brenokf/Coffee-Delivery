@@ -13,4 +13,10 @@ export const Container = styled.div`
     font-weight: bold;
     margin-bottom: 1rem;
   }
+  form {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `

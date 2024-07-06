@@ -5,13 +5,17 @@ export const FrameContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export const CoffeeCardContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 448px;
-  height: 498px;
+  height: 100%;
   padding: 40px;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -156,14 +160,16 @@ export const RemoveItem = styled.button`
   svg {
     color: ${(props) => props.theme.purple};
   }
-  /* svg:hover {
-    color: ${(props) => props.theme.red};
-  } */
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.theme['base-hover']};
+  }
 `
 export const TotalPurchaseAndDelivery = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 368px;
   height: 92px;
@@ -239,6 +245,7 @@ export const Total = styled.div`
   }
 `
 export const ConfirmOrder = styled.button`
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,7 +255,13 @@ export const ConfirmOrder = styled.button`
   border-radius: 6px;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+  text-decoration-line: none;
   font-weight: bold;
   background: ${(props) => props.theme.yellow};
   color: ${(props) => props.theme.white};
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    background: ${(props) => props.theme['yellow-dark']};
+  }
 `
