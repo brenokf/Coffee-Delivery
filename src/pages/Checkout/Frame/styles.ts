@@ -39,7 +39,7 @@ export const FrameFormTitle = styled.div`
     color: ${(props) => props.theme['base-text']};
   }
 `
-export const FormsContainer = styled.form`
+export const FormsContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 560px;
