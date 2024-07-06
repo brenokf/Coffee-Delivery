@@ -8,7 +8,15 @@ import {
   Payment,
   Time,
 } from './styles'
+import { MarketContext } from '../../../contexts/Marketcontext'
+import { useContext } from 'react'
+
 export function OrderInfo() {
+  const { userInformation } = useContext(MarketContext)
+  const { streetName, houseNumber, neighborhood, cityName, uf, payType } =
+    userInformation
+
+  console.log({ depois: userInformation })
   return (
     <OrderInfoContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -23,8 +31,11 @@ export function OrderInfo() {
               </div>
 
               <span>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>{' '}
-                Farrapos - Porto Alegre, RS
+                Entrega em <br />
+                <strong>
+                  {streetName}, {houseNumber},
+                </strong>
+                {neighborhood} - {cityName}, {uf}
               </span>
             </Local>
             <Time itemColor="Yellow">
@@ -32,7 +43,7 @@ export function OrderInfo() {
                 <Timer size={16} weight="fill" />
               </div>
               <span>
-                Previsão de entrega <strong>20 min - 30 min</strong>
+                Previsão de entrega <strong>20 min - 30 min </strong>
               </span>
             </Time>
             <Payment itemColor="Brand">
@@ -40,7 +51,7 @@ export function OrderInfo() {
                 <CurrencyDollar size={16} weight="fill" />
               </div>
               <span>
-                Pagamento na entrega <strong>Cartão de Crédito</strong>
+                Pagamento na entrega <strong>{payType}</strong>
               </span>
             </Payment>
           </OrderInfoPersonalInformation>
