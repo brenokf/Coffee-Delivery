@@ -18,10 +18,6 @@ import {
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { useContext } from 'react'
 import { MarketContext } from '../../../contexts/Marketcontext'
-import { NavLink, Link } from 'react-router-dom'
-interface submitDisabled {
-  isSubmitDisabled: boolean
-}
 
 export function CoffeeCard({
   isSubmitDisabled,
@@ -103,11 +99,9 @@ export function CoffeeCard({
             <p>{`${grandTotalOfPurchase(costFreight)}`}</p>
           </Total>
         </TotalPurchaseAndDelivery>
-        <Link to="/success" title="Success">
-          <ConfirmOrder type="button" disabled={isSubmitDisabled}>
-            CONFIRMAR PEDIDO
-          </ConfirmOrder>
-        </Link>
+        <ConfirmOrder type="submit" disabled={isSubmitDisabled}>
+          CONFIRMAR PEDIDO
+        </ConfirmOrder>
       </CoffeeCardContainer>
     </FrameContainer>
   )
