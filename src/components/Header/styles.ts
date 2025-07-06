@@ -10,6 +10,15 @@ export const HeaderContainer = styled.header`
     display: flex;
     gap: 0.5rem;
   }
+  @media (max-width: 1200px) {
+    padding: 2rem 4rem 2rem;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1rem;
+    gap: 10px;
+  }
 `
 
 export const ActionsContainer = styled.div`
@@ -19,6 +28,10 @@ export const ActionsContainer = styled.div`
   width: 12.06rem;
   height: 100%;
   gap: 12px;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
 `
 
 export const LocationActionContainer = styled.div`
@@ -35,6 +48,10 @@ export const LocationActionContainer = styled.div`
   svg {
     opacity: 10%;
     color: ${(props) => props.theme.purple};
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 0.9rem;
   }
 `
 
@@ -66,5 +83,14 @@ export const CartCounter = styled.div`
     font-size: 14px;
     font-weight: 400;
     color: ${(props) => props.theme.white};
+  }
+  @media (max-width: 480px) {
+    margin-left: 20px;
+    margin-top: -20px;
+    width: 16px;
+    height: 16px;
+    p {
+      font-size: 12px;
+    }
   }
 `
