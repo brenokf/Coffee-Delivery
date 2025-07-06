@@ -31,6 +31,15 @@ export const CoffeeCardContainer = styled.div`
     border: 1px solid ${(props) => props.theme['base-button']};
     margin: 24px 0 24px 0;
   }
+
+  @media (max-width: 600px) {
+    width: 95vw;
+    padding: 12px 4px;
+
+    hr {
+      width: 90vw;
+    }
+  }
 `
 export const CoffeeCardItem = styled.div`
   display: flex;
@@ -46,6 +55,15 @@ export const CoffeeCardItem = styled.div`
     font-size: 16px;
     font-weight: bold;
     color: ${(props) => props.theme['base-text']};
+  }
+
+  @media (max-width: 600px) {
+    width: 90vw;
+    height: auto;
+
+    p {
+      font-size: 13px;
+    }
   }
 `
 export const InfoContainer = styled.div`
@@ -130,7 +148,11 @@ export const BuyCounter = styled.div`
     height: 21px;
     font-weight: bold;
     text-align: center;
+    appearance: textfield;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
   }
+
   input[type='number'] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
@@ -174,6 +196,11 @@ export const TotalPurchaseAndDelivery = styled.div`
   width: 368px;
   height: 92px;
   margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    width: 90vw;
+    height: auto;
+  }
 `
 export const TotalPurchase = styled.div`
   display: flex;
@@ -263,5 +290,11 @@ export const ConfirmOrder = styled.button`
     cursor: pointer;
     text-decoration: none;
     background: ${(props) => props.theme['yellow-dark']};
+  }
+
+  @media (max-width: 600px) {
+    width: 90vw;
+    font-size: 12px;
+    height: 40px;
   }
 `
