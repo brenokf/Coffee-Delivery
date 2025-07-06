@@ -16,12 +16,39 @@ export const ContainerList = styled.div`
     font-size: 32px;
     font-weight: 800;
   }
+  @media (max-width: 1200px) {
+    padding: 2.5rem 2rem 2.5rem;
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 0.5rem;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    padding: 1rem 0.2rem;
+    gap: 8px;
+    h1 {
+      font-size: 22px;
+    }
+  }
 `
 export const Filters = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 8px;
+  width: 100%;
+  flex-wrap: wrap;
+  z-index: 1;
+  position: relative;
+  @media (max-width: 900px) {
+    margin-bottom: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    margin-bottom: 0.5rem;
+  }
 `
 
 export const Tag = styled.button`
@@ -68,6 +95,17 @@ export const CoffeeCardContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 19px;
+  width: 100%;
+  margin-top: 2rem;
+  @media (max-width: 900px) {
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 600px) {
+    gap: 6px;
+    margin-top: 1rem;
+  }
 `
 
 export const CoffeeCard = styled.div`
@@ -84,6 +122,12 @@ export const CoffeeCard = styled.div`
   border-top-right-radius: 36px;
   border-bottom-left-radius: 36px;
   border-bottom-right-radius: 6px;
+  @media (max-width: 600px) {
+    width: 95vw;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 0.5rem;
+  }
 `
 export const ImgContainerCard = styled.div`
   width: 120px;
@@ -202,20 +246,36 @@ export const CounterButton = styled.button`
   }
 `
 export const BuyCounter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   box-sizing: border-box;
-  width: 72px;
-  height: 38px;
-  border-radius: 6px;
-
-  background: ${(props) => props.theme['base-button']};
+  width: 72px !important;
+  height: 38px !important;
+  border-radius: 6px !important;
+  background: ${(props) => props.theme['base-button']} !important;
   button {
+    outline: none;
+    border: none;
+    background: transparent;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 2px;
+    cursor: pointer;
+    svg {
+      color: ${(props) => props.theme.purple};
+      transition: color 0.2s;
+    }
+    &:hover svg {
+      color: ${(props) => props.theme['purple-dark']};
+    }
   }
-
   input[type='number'] {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     max-width: 20px;
     background: ${(props) => props.theme['base-button']};
     border: none;
@@ -223,15 +283,38 @@ export const BuyCounter = styled.div`
     height: 21px;
     font-weight: bold;
     text-align: center;
-  }
-  input[type='number'] {
+    appearance: textfield;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
-    appearance: textfield;
+    margin: 0 4px;
   }
-
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
+  }
+`
+export const StyledCartButton = styled.button`
+  outline: none;
+  border: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  background-color: ${(props) => props.theme['purple-dark']};
+  color: ${(props) => props.theme.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.1s;
+  cursor: pointer;
+  svg {
+    color: ${(props) => props.theme.white};
+    transition: color 0.2s;
+  }
+  &:hover {
+    background-color: ${(props) => props.theme.purple};
+    color: ${(props) => props.theme.white};
+    svg {
+      color: ${(props) => props.theme.white};
+    }
   }
 `
