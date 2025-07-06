@@ -19,4 +19,22 @@ export const Container = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
   }
+  @media (max-width: 1200px) {
+    padding: 2.5rem 2rem 2.5rem;
+  }
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0.5rem;
+    form {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media (max-width: 600px) {
+    padding: 1rem 0.2rem;
+    h4 {
+      font-size: 16px;
+    }
+  }
 `
