@@ -6,6 +6,7 @@ import { MarketContext } from '../../contexts/Marketcontext'
 import { useContext } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useNavigate } from 'react-router-dom'
 
 const newUserAndressFormSchema = z.object({
   cep: z
@@ -24,6 +25,7 @@ type UserAndressFormData = z.infer<typeof newUserAndressFormSchema>
 
 export function Checkout() {
   const { submitOrder } = useContext(MarketContext)
+  const navigate = useNavigate()
   const newUserAndressForm = useForm<UserAndressFormData>({
     resolver: zodResolver(newUserAndressFormSchema),
     defaultValues: {
@@ -37,13 +39,19 @@ export function Checkout() {
     },
   })
 
-  const { handleSubmit, watch, reset } = newUserAndressForm
-  const handleSubmitUserAndress = (data: UserAndressFormData) => {
-    console.log(data)
+  const { handleSubmit, watch, trigger, formState } = newUserAndressForm
+  const handleSubmitUserAndress = async (data: UserAndressFormData) => {
+    // Validação extra para garantir que todos os campos obrigatórios estejam preenchidos
+    const valid = await trigger()
+    if (!valid) {
+      alert('Por favor, preencha todos os campos obrigatórios corretamente!')
+      return
+    }
     submitOrder(data)
+    navigate('/success')
   }
   const cep = watch('cep')
-  const isSubmitDisabled = !cep
+  const isSubmitDisabled = !cep || formState.isSubmitting
   return (
     <Container>
       <form onSubmit={handleSubmit(handleSubmitUserAndress)} action="">
