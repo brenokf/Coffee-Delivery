@@ -5,6 +5,10 @@ export const FrameContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  @media (max-width: 600px) {
+    width: 100vw;
+    padding: 0 4px;
+  }
 `
 export const CoffeeCardFormContainer = styled.div`
   display: flex;
@@ -15,6 +19,10 @@ export const CoffeeCardFormContainer = styled.div`
   margin-bottom: 12px;
   border-radius: 6px;
   background: ${(props) => props.theme['base-card']};
+  @media (max-width: 600px) {
+    padding: 16px 4px;
+    height: auto;
+  }
 `
 export const FrameFormTitle = styled.div`
   display: flex;
@@ -38,6 +46,11 @@ export const FrameFormTitle = styled.div`
     font-weight: 400;
     color: ${(props) => props.theme['base-text']};
   }
+  @media (max-width: 600px) {
+    max-width: 100vw;
+    height: auto;
+    gap: 8px;
+  }
 `
 export const FormsContainer = styled.div`
   display: flex;
@@ -45,6 +58,11 @@ export const FormsContainer = styled.div`
   max-width: 560px;
   height: 216px;
   padding-top: 32px;
+  @media (max-width: 600px) {
+    max-width: 100vw;
+    padding-top: 12px;
+    height: auto;
+  }
 `
 export const InfoContainer = styled.div`
   display: flex;
@@ -55,6 +73,11 @@ export const InfoContainer = styled.div`
   max-width: 560px;
   height: 42px;
   margin-bottom: 16px;
+  @media (max-width: 600px) {
+    max-width: 100vw;
+    height: auto;
+    margin-bottom: 8px;
+  }
 `
 const InfoInputProps = styled.input`
   margin-right: 12px;
@@ -101,6 +124,10 @@ export const CoffeeCardPayContainer = styled.div`
   padding: 32px 40px 40px 40px;
   border-radius: 6px;
   background: ${(props) => props.theme['base-card']};
+  @media (max-width: 600px) {
+    padding: 16px 4px;
+    height: auto;
+  }
 `
 export const FramePayContainer = styled.div`
   display: flex;
@@ -108,9 +135,12 @@ export const FramePayContainer = styled.div`
   max-width: 100%;
   height: 44px;
   gap: 16px;
-
   svg {
     color: ${(props) => props.theme.purple};
+  }
+  @media (max-width: 600px) {
+    height: auto;
+    gap: 8px;
   }
 `
 export const FramePayTitle = styled.div`
@@ -144,6 +174,11 @@ export const FramePayButtonsContainer = styled.div`
   height: 51px;
   margin-top: 32px;
   gap: 16px;
+  @media (max-width: 600px) {
+    width: 100vw;
+    margin-top: 12px;
+    gap: 8px;
+  }
 `
 
 interface selected {
@@ -157,27 +192,28 @@ export const PaymentMethodInput = styled.button<selected>`
   height: 51px;
   align-items: center;
   justify-content: center;
-
   border: none;
   border-radius: 6px;
-  //${(props) => props.theme['base-button']};
   background: ${(props) =>
     props.isSelected
       ? props.theme['purple-light']
       : props.theme['base-button']};
-
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: ${(props) => props.theme['base-text']};
   gap: 12px;
-
   svg {
     color: ${(props) => props.theme.purple};
   }
-
   &:hover {
     cursor: pointer;
     background: ${(props) => props.theme['base-hover']};
+  }
+  @media (max-width: 600px) {
+    width: 100vw;
+    min-width: 120px;
+    font-size: 11px;
+    height: 40px;
   }
 `
