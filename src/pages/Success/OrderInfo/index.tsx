@@ -7,20 +7,28 @@ import {
   OrderInfoPersonalInformation,
   Payment,
   Time,
+  OrderInfoHeader,
 } from './styles'
 import { MarketContext } from '../../../contexts/Marketcontext'
 import { useContext } from 'react'
 
 export function OrderInfo() {
-  const { userInformation } = useContext(MarketContext)
-  const { streetName, houseNumber, neighborhood, cityName, uf, payType } =
-    userInformation
+  const { userInformation, checkout, payType } = useContext(MarketContext)
+  // fallback para evitar undefined
+  const street = userInformation?.streetName || ''
+  const number = userInformation?.houseNumber || ''
+  const neighborhood = userInformation?.neighborhood || ''
+  const city = userInformation?.cityName || ''
+  const uf = userInformation?.uf || ''
+  const cep = userInformation?.cep || ''
+  const complement = userInformation?.complementAddress || ''
 
-  console.log({ depois: userInformation })
   return (
     <OrderInfoContainer>
-      <h1>Uhu! Pedido confirmado</h1>
-      <span>Agora é só aguardar que logo o café chegará até você</span>
+      <OrderInfoHeader>
+        <h1>Uhu! Pedido confirmado</h1>
+        <span>Agora é só aguardar que logo o café chegará até você</span>
+      </OrderInfoHeader>
 
       <OrderInfoStructure>
         <OrderInfoInsideStructure>
@@ -29,13 +37,15 @@ export function OrderInfo() {
               <div>
                 <MapPin size={16} weight="fill" />
               </div>
-
               <span>
                 Entrega em <br />
                 <strong>
-                  {streetName}, {houseNumber},
+                  {street}, {number}
+                  {complement ? `, ${complement}` : ''}
                 </strong>
-                {neighborhood} - {cityName}, {uf}
+                <br />
+                {neighborhood} - {city}, {uf} <br />
+                CEP: {cep}
               </span>
             </Local>
             <Time itemColor="Yellow">
@@ -51,9 +61,30 @@ export function OrderInfo() {
                 <CurrencyDollar size={16} weight="fill" />
               </div>
               <span>
-                Pagamento na entrega <strong>{payType}</strong>
+                Pagamento na entrega{' '}
+                <strong>{payType || 'Não informado'}</strong>
               </span>
             </Payment>
+            {/* Lista completa de produtos do pedido */}
+            {checkout && checkout.length > 0 && (
+              <div style={{ marginTop: '1.5rem', fontSize: 14, width: '100%' }}>
+                <strong>Produtos do pedido:</strong>
+                <ul style={{ margin: '0.5rem 0 0 1rem', padding: 0 }}>
+                  {checkout.map((item) => (
+                    <li
+                      key={item.id}
+                      style={{ marginBottom: 4, listStyle: 'disc' }}
+                    >
+                      {item.title} (x{item.quantity}){' '}
+                      {item.total?.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </OrderInfoPersonalInformation>
         </OrderInfoInsideStructure>
       </OrderInfoStructure>
