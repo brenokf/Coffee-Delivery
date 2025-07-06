@@ -1,33 +1,67 @@
 import styled from 'styled-components'
 
 export const IntroContainer = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   max-height: 544px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
   padding: 2.5rem 18rem 2.5rem;
-
-  img {
-    margin-left: 145px;
+  box-sizing: border-box;
+  overflow: hidden;
+  gap: 2rem;
+  > img {
     max-width: 476px;
     max-height: 360px;
+    width: 100%;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
+    flex-grow: 0;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 1200px) {
+    padding: 2.5rem 2rem 2.5rem;
+    > img {
+      max-width: 350px;
+    }
   }
   @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0.5rem;
+    > img {
+      margin: 0 auto;
+      max-width: 250px;
+      max-height: 200px;
+    }
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.2rem;
+    > img {
+      max-width: 95vw;
+      max-height: 120px;
+    }
   }
 `
+
 export const BackgroundContainer = styled.div`
   position: absolute;
-  display: flex;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
   width: 100%;
-  max-height: 34rem;
-  z-index: -1;
+  height: 100%;
+  z-index: 0;
   background-size: cover;
+  filter: blur(50px);
   -webkit-filter: blur(50px);
   background:
     url(src/assets/Vector-10.svg) 10% 100% no-repeat,
@@ -44,13 +78,48 @@ export const BackgroundContainer = styled.div`
 
 export const InformationContainer = styled.div`
   max-width: 588px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  /* padding: 4rem 0 0 0;
-  margin-right: 2rem; */
+  padding-bottom: 3vw;
+  @media (max-width: 900px) {
+    max-width: 100vw;
+    align-items: center;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    max-width: 100vw;
+    align-items: center;
+    text-align: center;
+  }
+`
+
+export const ContainerOptiosIntens = styled.div`
+  display: flex;
+  max-width: 567px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow: visible;
+  min-height: 120px;
+  @media (max-width: 900px) {
+    justify-content: flex-start;
+    gap: 12px;
+    min-height: 120px;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    overflow: visible;
+    min-height: unset;
+  }
 `
 
 export const TitleContainer = styled.div`
@@ -64,7 +133,8 @@ export const TitleContainer = styled.div`
     font-family: 'Baloo 2', sans-serif;
     font-size: 48px;
     font-weight: 800;
-    line-height: 130%;
+    line-height: 1.2;
+    padding-top: 8px;
   }
   p {
     font-family: 'Roboto', sans-serif;
@@ -72,18 +142,30 @@ export const TitleContainer = styled.div`
     font-weight: 400 bold;
     color: ${(props) => props.theme['base-subtitle']};
   }
+  @media (max-width: 900px) {
+    align-items: center;
+    text-align: center;
+    h1 {
+      font-size: 32px;
+      padding-top: 6px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 600px) {
+    align-items: center;
+    text-align: center;
+    h1 {
+      font-size: 22px;
+      padding-top: 4px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
 `
 
-export const ContainerOptiosIntens = styled.div`
-  display: flex;
-  max-width: 567px;
-  max-height: 84px;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-`
 export const ItenOption = styled.div`
   display: flex;
   align-items: center;
