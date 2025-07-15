@@ -148,10 +148,14 @@ export function Home() {
       tags: [{ tag: 'ESPECIAL' }, { tag: 'ALCOÓLICO' }],
     },
   ]
+  const listCoffesWithTotal = listCoffes.map((coffe) => ({
+    ...coffe,
+    total: coffe.price * coffe.quantity,
+  }))
   return (
     <>
       <Intro />
-      <CoffeList listCoffes={listCoffes} />
+      <CoffeList listCoffes={listCoffesWithTotal} />
     </>
   )
 }
