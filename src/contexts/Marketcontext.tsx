@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+/* eslint-disable prettier/prettier */
+import { ReactNode, createContext, useState } from 'react'
 
 export interface CoffePropries {
   id: number
@@ -7,10 +8,11 @@ export interface CoffePropries {
   image: string
   price: number
   quantity: number
+  total: number
   tags: {
     tag: string
   }[]
-  total: number
+
 }
 
 export interface UserAndress {
@@ -21,7 +23,6 @@ export interface UserAndress {
   neighborhood: string
   cityName: string
   uf: string
-  PaymentType: string | undefined
 }
 
 export interface MarketContextType {
@@ -266,11 +267,11 @@ export function MarketContextProvider({
     !value
       ? setCep('')
       : setCep(
-          value
-            .replace(/\D/g, '')
-            .replace(/^(\d{5})(\d{3})+?$/, '$1-$2')
-            .replace(/(-\d{3})(\d+?)/, '$1'),
-        )
+        value
+          .replace(/\D/g, '')
+          .replace(/^(\d{5})(\d{3})+?$/, '$1-$2')
+          .replace(/(-\d{3})(\d+?)/, '$1'),
+      )
   }
 
   const UF = [
@@ -316,7 +317,6 @@ export function MarketContextProvider({
   // previsão de entrega
   // tipo de pagamento
 
-  useEffect(() => {}, [checkout])
   return (
     <MarketContext.Provider
       value={{
